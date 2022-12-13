@@ -13,5 +13,5 @@ Example terminal command:
 
 ## Options
 package name:
-    * `--name` : name of new package (also used for entry point alias)
+* `--name` : name of new package (also used for entry point alias)
     
