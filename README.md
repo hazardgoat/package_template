@@ -1,6 +1,6 @@
 # package_template
 ## Overview
-This tool automates the creation of directory structures and files when setting up a new installable package development project.
+This tool automates creation of directory structures and files when setting up a new installable package development project.
 
 ## Key Details
 - Creates new package template on user's Desktop
@@ -13,5 +13,5 @@ Example terminal command:
 
 ## Options
 package name:
-* `--name` : name of new package (also used for entry point alias)
+    * `--name` : name of new package (also used for entry point alias)
     
