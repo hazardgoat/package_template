@@ -1,6 +1,6 @@
 # package_template
 ## Overview
-This package automates the creation of directory structures and files when setting up a new installable package development project.
+This tool automates the creation of directory structures and files when setting up a new installable package development project.
 
 ## Key Details
 - Creates new package template on user's Desktop
