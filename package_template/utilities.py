@@ -13,8 +13,7 @@ class Utilities:
                 self.package_name = input("Package name: ")
                 if len(self.package_name) < 1:
                     print("Package name must be at least 1 character long")
-        
-        self.desktop = os.path.expanduser("~/Desktop")
+
         self.user = os.path.expanduser("~").split("/")[-1]
         self.python_version = sys.version
 
@@ -22,6 +21,7 @@ class Utilities:
 class DirectoryUtilities(Utilities):
     def __init__(self):
         super().__init__()
+        self.desktop = os.path.expanduser("~/Desktop")
         self.directories = (self.package_name, "scripts", "tests")
         self.create_directory_structure()
     
