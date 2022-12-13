@@ -4,11 +4,11 @@ This tool automates the creation of directory structures and files when setting 
 
 ## Key Details
 - Creates new package template on user's Desktop
-- Package template is setup for stand-alone installation
-- Package is run using an alias of the new package name
+- New package template is setup for stand-alone installation
+- New package is run using an alias of the package name
 
 ## Operation
-Example:
+Example terminal command:
 `package_template --name test_package`
 
 ## Options
