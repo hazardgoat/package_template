@@ -86,9 +86,8 @@ class FileUtilites(DirectoryUtilities):
             def main():
                 run_{package}()
             """.format(package=self.package_name))
-        print("FILES 2:", files)
+
         file_path = os.path.join(self.desktop, self.directories[0], self.directories[1], files[0])
-        print("FILE_PATH:", file_path)
         with open(file_path, "w") as f:
             f.write(data)
 
@@ -102,7 +101,6 @@ class FileUtilites(DirectoryUtilities):
             f.write(data)
 
     def copy_from_template(self, files: list):
-        print('FILES:', files)
         template_path = os.path.join(os.path.dirname(__file__), "templates", files[1])
         file_path = os.path.join(self.desktop, self.directories[0], files[0])
         shutil.copyfile(template_path, file_path)
@@ -114,7 +112,6 @@ class FileUtilites(DirectoryUtilities):
             else:
                 files = [file]
 
-            print("data[0]", data[0])
             if data[0] == "setup_file":
                 self.script_file(files=files)
             elif data[0] == "readme_file":
