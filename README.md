@@ -11,7 +11,7 @@ This tool automates creation of directory structures and files when setting up a
 1) Create a local Python environment >= 3.7 and activate it
 2) Download this repository (package_template)
 3) From the terminal `cd` to the `package_template-master` directory within it containing the `requirments.txt` file.
-4) Install the `requirments.txt` file
+4) Install the `requirments.txt` file with `pip install -r requirements.txt`
 5) Install `package_template` with `pip install --upgrade .`
 6) Run `package_template` from anywhere with the `package_template` alias.
 

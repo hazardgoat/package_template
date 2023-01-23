@@ -20,23 +20,27 @@ class Utilities:
         self.out_path = None
         self.user = None
         self.python_version = None
-        self.directories = [self.package_name, "scripts", "tests"]
-        
+
         self.get_package_name()
+        self.directories = [self.package_name, "scripts", "tests"]
+
         self.create_directory_structure()
+
 
     def get_package_name(self):
         """Gets the name of the package to be created from user input in the terminal,
         as well as the output path (if specified), user name, and python version of the active environment
         """
+        logging.info(f"Getting package info")
+
         if ("--name" in sys.argv):
             self.package_name = sys.argv[sys.argv.index("--name") + 1]
         else:
-            while len(self.package_name) < 1:
+            while self.package_name is None:
                 self.package_name = input("Package name: ")
                 if len(self.package_name) < 1:
                     logging.warning("Package name must be at least 1 character long")
-                    
+
         if ("--outpath" in sys.argv):
             self.out_path = sys.argv[sys.argv.index("--outpath") + 1]
         else:
@@ -47,20 +51,21 @@ class Utilities:
         else:  # OS X or Linux
             self.user = os.path.expanduser("~").split("/")[-1]
 
-                                           
-        self.python_version = sys.version
+        self.python_version = f"{sys.version_info[0]}.{sys.version_info[1]}.{sys.version_info[2]}"
 
     def create_directory_structure(self):
         """Creates package directories at the output path
         """
         logging.info(f"Creating package directories @ {self.out_path}")
-        
+
         for dir in self.directories:
+            if dir is None:
+                continue
             dir_path = os.path.join(self.out_path, self.package_name, dir)
             os.makedirs(dir_path, exist_ok=True)
 
 
-class FileUtilites(Utilities):
+class FileUtilities(Utilities):
     """Creates the base package files from user input and templates
     """
     def __init__(self):
@@ -73,8 +78,6 @@ class FileUtilites(Utilities):
                       ".gitignore": ["copy_from_template", "gitignore_template.py"],
                       self.script_name: ["script_file"],
                       "__init__.py": ["write_empty_file"]}
-
-        self.create_files()
 
     def setup_file(self, files: list):
         """Writes out the setup file to the relevant package directory
@@ -104,6 +107,9 @@ class FileUtilites(Utilities):
             """)
         
         file_path = os.path.join(self.out_path, self.directories[0], files[0])
+
+        logging.info(f"Writing {files[0]} to {file_path}")
+
         with open(file_path, "w") as f:
             f.write(data)
 
@@ -112,12 +118,15 @@ class FileUtilites(Utilities):
 
         Args:
             files: list of file names
-        """                        
+        """
         data = inspect.cleandoc(f"""
             # {self.package_name}
             ## Overview""")
                                 
         file_path = os.path.join(self.out_path, self.directories[0], files[0])
+
+        logging.info(f"Writing {files[0]} to {file_path}")
+
         with open(file_path, "w") as f:
             f.write(data)
 
@@ -134,6 +143,9 @@ class FileUtilites(Utilities):
             """)
 
         file_path = os.path.join(self.out_path, self.directories[0], self.directories[1], files[0])
+
+        logging.info(f"Writing {self.script_name} to {file_path}")
+
         with open(file_path, "w") as f:
             f.write(data)
 
@@ -148,7 +160,9 @@ class FileUtilites(Utilities):
             file_path = os.path.join(self.out_path, self.directories[0], self.directories[index], files[0])
         else:
             file_path = os.path.join(self.out_path, self.directories[0], files[0])
-        
+
+        logging.info(f"Writing {files[0]} to {file_path}")
+
         data = ""
         with open(file_path, "w") as f:
             f.write(data)
@@ -161,6 +175,9 @@ class FileUtilites(Utilities):
         """
         template_path = os.path.join(os.path.dirname(__file__), "templates", files[1])
         file_path = os.path.join(self.out_path, self.directories[0], files[0])
+
+        logging.info(f"Writing {files[0]} to {file_path}")
+
         shutil.copyfile(template_path, file_path)
 
     def create_files(self):

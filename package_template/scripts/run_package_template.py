@@ -4,5 +4,5 @@ def run_package_template():
     """Runs all of the package file creation methods via the
     create_files method
     """
-    file_utils = utilities.FileUtilites()
+    file_utils = utilities.FileUtilities()
     file_utils.create_files()
